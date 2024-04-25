@@ -1,0 +1,39 @@
+import logo from './logo.svg';
+import './App.css';
+import './loginPage.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Row, Col, Button, Card, Form ,FloatingLabel} from 'react-bootstrap';
+
+function App() {
+  return (
+  <div className="main">
+    <div className="submain">
+    <div className="firstGrid">
+    </div>
+    <div className='secondGrid'>
+      <div className="form-wrapper">
+      <h2>Savic</h2>
+      <FloatingLabel
+        controlId="floatingInput"
+        label="Email address"
+        className="mb-3"
+      >
+        <Form.Control type="email" placeholder="name@example.com" />
+      </FloatingLabel>
+      <FloatingLabel controlId="floatingPassword" label="Password">
+        <Form.Control type="password" placeholder="Password" />
+      </FloatingLabel>
+      <Button variant="primary" className='signinButton'>Sign In </Button>
+      <br/>
+      <span style={{fontWeight:'bold'}}>Don't have an account?  <span style={{color:"#2e4167",textDecoration:'underLine',cursor:'pointer'}}>Sign up</span></span>
+      </div>
+      </div>
+     
+      
+     
+    </div>
+  </div>
+  );
+}
+
+export default App;

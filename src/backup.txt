@@ -1,0 +1,169 @@
+import React, { useState } from "react";
+import "./loginPage.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Card,
+  Form,
+  FloatingLabel,
+} from "react-bootstrap";
+
+const LoginPage = () => {
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // state for showing password
+  const [name, SetName] = useState("");
+  const [email, setEmail] = useState(""); // State for email
+  const [password, setPassword] = useState(""); // State for password
+  const [confirmPassword, setConfirmPassword] = useState(""); // State for confirm password
+
+  const handleSignUpClick = () => {
+    setIsSignUp(true);
+  };
+
+  const handleSignInClick = () => {
+    setIsSignUp(false);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword); // Toggle password visibility
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    // Check if any required field is empty
+    if (isSignUp && (!name || !email || !password || !confirmPassword)) {
+      alert("Please fill in all required fields.");
+      return;
+    } else if (!isSignUp && (!email || !password)) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    // If all required fields are filled, proceed with form submission
+    // Add your form submission logic here
+  };
+
+  return (
+    <div className="main">
+      <div className="submain">
+        <div className="firstGrid">
+          <img src="./Images/logoimage.jpg" alt="Login" className="Login-img" />
+        </div>
+        <div className="secondGrid">
+          <div className="form-wrapper">
+            <img src="./Images/Savic.png" alt="Logo" className="Logo" />
+            <Form onSubmit={handleSubmit}>
+              {" "}
+              {/* Add onSubmit event handler */}
+              {isSignUp && (
+                <FloatingLabel
+                  controlId="floatingName"
+                  label="Name"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder="Your Name"
+                    value={name}
+                    onChange={(e) => SetName(e.target.value)}
+                    required
+                  />
+                </FloatingLabel>
+              )}
+              <FloatingLabel
+                controlId="floatingInput"
+                label="Email address"
+                className="mb-3"
+              >
+                <Form.Control
+                  id="input-box"
+                  type="email"
+                  placeholder="name@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </FloatingLabel>
+              <FloatingLabel
+                controlId="floatingPassword"
+                label="Password"
+                className="mb-3"
+              >
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </FloatingLabel>
+              {isSignUp && (
+                <FloatingLabel
+                  controlId="floatingConfirmPassword"
+                  label="Confirm Password"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                  />
+                </FloatingLabel>
+              )}
+              <div className="d-flex justify-content-end mb-3 text-end">
+                {" "}
+                {/* Add text-end class */}
+                <a
+                  style={{ textDecoration: "underline", cursor: "pointer" }}
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? "Hide" : "Show"} Password
+                </a>
+              </div>
+              <div className="d-flex justify-content-center">
+                <Button
+                  variant="primary"
+                  className="btn-md custom-bold"
+                  style={{ fontWeight: "600" }}
+                  type="submit"
+                >
+                  {isSignUp ? "Sign Up" : "Sign In"}
+                </Button>
+              </div>
+            </Form>
+            <br />
+            <div className="bold-span-wrapper">
+              <span style={{ fontWeight: "bold" }}>
+                {isSignUp
+                  ? "Already have an account? "
+                  : "Don't have an account? "}
+                <span
+                  style={{
+                    color: "#0d6efd",
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
+                  onClick={isSignUp ? handleSignInClick : handleSignUpClick}
+                >
+                  {isSignUp ? "Sign in" : "Sign up"}
+                </span>
+              </span>{" "}
+            </div>
+            {/* Copyright notice */}
+            <div className="copyright">
+              <p>&copy; SAVIC {new Date().getFullYear()} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LoginPage;
